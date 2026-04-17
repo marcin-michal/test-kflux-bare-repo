@@ -1,0 +1,17 @@
+apiVersion: tekton.dev/v1
+kind: Pipeline
+metadata:
+  name: always-fail
+spec:
+  params:
+    - name: SNAPSHOT
+      type: string
+  tasks:
+    - name: fail
+      taskSpec:
+        steps:
+          - name: fail
+            image: registry.access.redhat.com/ubi9/ubi-minimal:latest
+            script: |
+              echo "Intentional failure for testing"
+              exit 1
